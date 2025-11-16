@@ -1,0 +1,64 @@
+{
+  "app": {
+    "name": "Metronomo Pro",
+    "tagline": "Compagno Ritmico Professionale"
+  },
+  "controls": {
+    "play": "Riproduci",
+    "pause": "Pausa",
+    "stop": "Ferma",
+    "tapTempo": "Tempo a Tocchi",
+    "reset": "Ripristina"
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "tempo": "Tempo",
+    "bpm": "BPM",
+    "timeSignature": "Indicazione di Tempo",
+    "volume": "Volume",
+    "sound": "Suono",
+    "visual": "Visivo",
+    "vibration": "Vibrazione",
+    "soundType": "Tipo di Suono",
+    "language": "Lingua",
+    "theme": "Tema",
+    "keepScreenOn": "Mantieni Schermo Acceso",
+    "flashOnBeat": "Lampeggia sul Battito"
+  },
+  "soundTypes": {
+    "click": "Click",
+    "woodblock": "Blocco di Legno",
+    "cowbell": "Campanaccio",
+    "beep": "Bip",
+    "clap": "Applauso",
+    "stick": "Bacchetta"
+  },
+  "presets": {
+    "title": "Preset",
+    "save": "Salva Preset",
+    "delete": "Elimina",
+    "load": "Carica",
+    "name": "Nome Preset",
+    "create": "Crea Nuovo Preset"
+  },
+  "polyrhythm": {
+    "title": "Poliritmia",
+    "add": "Aggiungi Livello",
+    "remove": "Rimuovi Livello",
+    "beats": "Battiti",
+    "subdivision": "Suddivisione",
+    "enabled": "Abilitato"
+  },
+  "tabs": {
+    "metronome": "Metronomo",
+    "polyrhythm": "Poliritmia",
+    "presets": "Preset",
+    "settings": "Impostazioni"
+  },
+  "messages": {
+    "presetSaved": "Preset salvato con successo",
+    "presetDeleted": "Preset eliminato",
+    "error": "Si è verificato un errore",
+    "tapToStart": "Tocca per impostare il tempo"
+  }
+}

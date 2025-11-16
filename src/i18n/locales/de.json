@@ -1,0 +1,64 @@
+{
+  "app": {
+    "name": "Metronom Pro",
+    "tagline": "Professioneller Rhythmus-Begleiter"
+  },
+  "controls": {
+    "play": "Abspielen",
+    "pause": "Pause",
+    "stop": "Stoppen",
+    "tapTempo": "Tempo Tippen",
+    "reset": "Zurücksetzen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "tempo": "Tempo",
+    "bpm": "BPM",
+    "timeSignature": "Taktart",
+    "volume": "Lautstärke",
+    "sound": "Klang",
+    "visual": "Visuell",
+    "vibration": "Vibration",
+    "soundType": "Klangtyp",
+    "language": "Sprache",
+    "theme": "Design",
+    "keepScreenOn": "Bildschirm an lassen",
+    "flashOnBeat": "Blinken auf Schlag"
+  },
+  "soundTypes": {
+    "click": "Klick",
+    "woodblock": "Holzblock",
+    "cowbell": "Kuhglocke",
+    "beep": "Piep",
+    "clap": "Klatschen",
+    "stick": "Stock"
+  },
+  "presets": {
+    "title": "Voreinstellungen",
+    "save": "Voreinstellung Speichern",
+    "delete": "Löschen",
+    "load": "Laden",
+    "name": "Voreinstellungsname",
+    "create": "Neue Voreinstellung Erstellen"
+  },
+  "polyrhythm": {
+    "title": "Polyrhythmus",
+    "add": "Ebene Hinzufügen",
+    "remove": "Ebene Entfernen",
+    "beats": "Schläge",
+    "subdivision": "Unterteilung",
+    "enabled": "Aktiviert"
+  },
+  "tabs": {
+    "metronome": "Metronom",
+    "polyrhythm": "Polyrhythmus",
+    "presets": "Voreinstellungen",
+    "settings": "Einstellungen"
+  },
+  "messages": {
+    "presetSaved": "Voreinstellung erfolgreich gespeichert",
+    "presetDeleted": "Voreinstellung gelöscht",
+    "error": "Ein Fehler ist aufgetreten",
+    "tapToStart": "Tippen Sie, um das Tempo festzulegen"
+  }
+}

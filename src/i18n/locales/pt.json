@@ -1,0 +1,64 @@
+{
+  "app": {
+    "name": "Metrônomo Pro",
+    "tagline": "Companheiro Rítmico Profissional"
+  },
+  "controls": {
+    "play": "Reproduzir",
+    "pause": "Pausar",
+    "stop": "Parar",
+    "tapTempo": "Tempo por Toque",
+    "reset": "Reiniciar"
+  },
+  "settings": {
+    "title": "Configurações",
+    "tempo": "Tempo",
+    "bpm": "BPM",
+    "timeSignature": "Fórmula de Compasso",
+    "volume": "Volume",
+    "sound": "Som",
+    "visual": "Visual",
+    "vibration": "Vibração",
+    "soundType": "Tipo de Som",
+    "language": "Idioma",
+    "theme": "Tema",
+    "keepScreenOn": "Manter Tela Ligada",
+    "flashOnBeat": "Piscar na Batida"
+  },
+  "soundTypes": {
+    "click": "Clique",
+    "woodblock": "Bloco de Madeira",
+    "cowbell": "Sino",
+    "beep": "Bipe",
+    "clap": "Palma",
+    "stick": "Baqueta"
+  },
+  "presets": {
+    "title": "Predefinições",
+    "save": "Salvar Predefinição",
+    "delete": "Excluir",
+    "load": "Carregar",
+    "name": "Nome da Predefinição",
+    "create": "Criar Nova Predefinição"
+  },
+  "polyrhythm": {
+    "title": "Polirritmia",
+    "add": "Adicionar Camada",
+    "remove": "Remover Camada",
+    "beats": "Batidas",
+    "subdivision": "Subdivisão",
+    "enabled": "Ativado"
+  },
+  "tabs": {
+    "metronome": "Metrônomo",
+    "polyrhythm": "Polirritmia",
+    "presets": "Predefinições",
+    "settings": "Configurações"
+  },
+  "messages": {
+    "presetSaved": "Predefinição salva com sucesso",
+    "presetDeleted": "Predefinição excluída",
+    "error": "Ocorreu um erro",
+    "tapToStart": "Toque para definir o tempo"
+  }
+}

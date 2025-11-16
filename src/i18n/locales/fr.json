@@ -1,0 +1,64 @@
+{
+  "app": {
+    "name": "Métronome Pro",
+    "tagline": "Compagnon Rythmique Professionnel"
+  },
+  "controls": {
+    "play": "Jouer",
+    "pause": "Pause",
+    "stop": "Arrêter",
+    "tapTempo": "Tempo au Tap",
+    "reset": "Réinitialiser"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "tempo": "Tempo",
+    "bpm": "BPM",
+    "timeSignature": "Signature Rythmique",
+    "volume": "Volume",
+    "sound": "Son",
+    "visual": "Visuel",
+    "vibration": "Vibration",
+    "soundType": "Type de Son",
+    "language": "Langue",
+    "theme": "Thème",
+    "keepScreenOn": "Garder l'Écran Allumé",
+    "flashOnBeat": "Flash sur le Temps"
+  },
+  "soundTypes": {
+    "click": "Clic",
+    "woodblock": "Woodblock",
+    "cowbell": "Cloche",
+    "beep": "Bip",
+    "clap": "Claquement",
+    "stick": "Baguette"
+  },
+  "presets": {
+    "title": "Préréglages",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "load": "Charger",
+    "name": "Nom du Préréglage",
+    "create": "Créer un Nouveau Préréglage"
+  },
+  "polyrhythm": {
+    "title": "Polyrythmie",
+    "add": "Ajouter une Couche",
+    "remove": "Retirer une Couche",
+    "beats": "Temps",
+    "subdivision": "Subdivision",
+    "enabled": "Activé"
+  },
+  "tabs": {
+    "metronome": "Métronome",
+    "polyrhythm": "Polyrythmie",
+    "presets": "Préréglages",
+    "settings": "Paramètres"
+  },
+  "messages": {
+    "presetSaved": "Préréglage sauvegardé avec succès",
+    "presetDeleted": "Préréglage supprimé",
+    "error": "Une erreur s'est produite",
+    "tapToStart": "Tapez pour définir le tempo"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "app": {
+    "name": "Metronome Pro",
+    "tagline": "Professional Rhythm Companion"
+  },
+  "controls": {
+    "play": "Play",
+    "pause": "Pause",
+    "stop": "Stop",
+    "tapTempo": "Tap Tempo",
+    "reset": "Reset",
+    "apply": "Apply"
+  },
+  "settings": {
+    "title": "Settings",
+    "tempo": "Tempo",
+    "bpm": "BPM",
+    "timeSignature": "Time Signature",
+    "volume": "Volume",
+    "sound": "Sound",
+    "visual": "Visual",
+    "vibration": "Vibration",
+    "soundType": "Sound Type",
+    "language": "Language",
+    "theme": "Theme",
+    "keepScreenOn": "Keep Screen On",
+    "flashOnBeat": "Flash on Beat"
+  },
+  "soundTypes": {
+    "click": "Click",
+    "woodblock": "Woodblock",
+    "cowbell": "Cowbell",
+    "beep": "Beep",
+    "clap": "Clap",
+    "stick": "Stick"
+  },
+  "presets": {
+    "title": "Presets",
+    "save": "Save Preset",
+    "delete": "Delete",
+    "load": "Load",
+    "name": "Preset Name",
+    "create": "Create New Preset"
+  },
+  "polyrhythm": {
+    "title": "Polyrhythm",
+    "add": "Add Layer",
+    "remove": "Remove Layer",
+    "beats": "Beats",
+    "subdivision": "Subdivision",
+    "enabled": "Enabled"
+  },
+  "tabs": {
+    "metronome": "Metronome",
+    "polyrhythm": "Polyrhythm",
+    "presets": "Presets",
+    "settings": "Settings"
+  },
+  "messages": {
+    "presetSaved": "Preset saved successfully",
+    "presetDeleted": "Preset deleted",
+    "error": "An error occurred",
+    "tapToStart": "Tap to set tempo"
+  }
+}
