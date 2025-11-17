@@ -3,7 +3,6 @@ module.exports = function(api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      'react-native-reanimated/plugin',
       [
         'module-resolver',
         {
@@ -21,7 +20,9 @@ module.exports = function(api) {
             '@i18n': './src/i18n'
           }
         }
-      ]
+      ],
+      // Reanimated plugin must be listed last
+      'react-native-reanimated/plugin',
     ]
   };
 };

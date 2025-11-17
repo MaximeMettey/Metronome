@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.4] - 2025-11-17
+
+### Fixed
+- Fixed "Exception in HostObject::get got prop 'ReanimatedModule'" error
+- Added 'react-native-reanimated' import at top of index.js
+- Reordered Babel plugins to ensure Reanimated plugin is last
+- Fixed Reanimated initialization for Expo SDK 54
+
+### Changed
+- Moved react-native-reanimated plugin to end of Babel config
+- Added explicit Reanimated import in entry file
+
 ## [1.1.3] - 2025-11-17
 
 ### Fixed
