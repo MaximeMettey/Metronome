@@ -18,11 +18,32 @@ const resources = {
   pt: { translation: pt },
 };
 
+// Get device language - compatible with Expo SDK 54
+const getDeviceLanguage = (): string => {
+  try {
+    // Try new API (Expo SDK 54+)
+    const locales = Localization.getLocales();
+    if (locales && locales.length > 0 && locales[0].languageCode) {
+      return locales[0].languageCode;
+    }
+  } catch (error) {
+    // Fallback for older versions or if getLocales fails
+    try {
+      if (Localization.locale && typeof Localization.locale === 'string') {
+        return Localization.locale.split('-')[0];
+      }
+    } catch (e) {
+      console.warn('Failed to get device locale:', e);
+    }
+  }
+  return 'en'; // Default fallback
+};
+
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: Localization.locale.split('-')[0] || 'en',
+    lng: getDeviceLanguage(),
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
