@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.5] - 2025-11-17
+
+### Fixed
+- Fixed peer dependency conflict with @types/react
+- Updated @types/react from ~18.3.0 to ~19.0.0 (required by React Native 0.80.2)
+- Resolved ERESOLVE conflicts during npm install
+
+### Changed
+- @types/react: ~18.3.0 → ~19.0.0
+
 ## [1.1.4] - 2025-11-17
 
 ### Fixed
