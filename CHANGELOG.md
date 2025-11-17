@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-11-17
+
+### Changed
+- **BREAKING**: Updated to Expo SDK 54 for compatibility with latest Expo Go
+- Updated React to 18.3.1
+- Updated React Native to 0.76.5
+- Updated all Expo packages to SDK 54 compatible versions:
+  - expo-av: ~15.0.0
+  - expo-haptics: ~14.0.0
+  - expo-localization: ~16.0.0
+  - expo-status-bar: ~2.0.0
+  - expo-linear-gradient: ~14.0.0
+- Updated react-native-reanimated to ~3.16.0
+- Updated @react-native-async-storage/async-storage to ~2.0.0
+- Updated i18next to ^23.15.0
+- Updated react-i18next to ^15.0.0
+- Updated all devDependencies to latest versions
+- Changed web build command from `expo build:web` to `expo export:web`
+- Web build output now goes to `dist/` directory instead of `web-build/`
+
+### Fixed
+- Added missing babel-plugin-module-resolver dependency
+- Removed hardcoded asset paths to allow running without custom icons
+- Added comprehensive troubleshooting section to README
+
+### Added
+- QUICKSTART.md for easier onboarding
+- Troubleshooting section in README
+- SDK version requirements in documentation
+
 ## [1.0.0] - 2025-11-16
 
 ### Added

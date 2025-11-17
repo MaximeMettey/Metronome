@@ -6,8 +6,8 @@ A feature-rich, professional metronome application built with React Native and E
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android%20%7C%20Web%20%7C%20Desktop-lightgrey)
-![React Native](https://img.shields.io/badge/react--native-0.74-blue)
-![Expo](https://img.shields.io/badge/expo-~51.0-black)
+![React Native](https://img.shields.io/badge/react--native-0.76-blue)
+![Expo](https://img.shields.io/badge/expo-~54.0-black)
 
 ## ✨ Features
 
@@ -256,10 +256,10 @@ eas build --platform ios
 ```bash
 npm run build:web
 # or
-expo build:web
+expo export:web
 ```
 
-The web build will be output to the `web-build/` directory.
+The web build will be output to the `dist/` directory.
 
 ### Local Builds
 

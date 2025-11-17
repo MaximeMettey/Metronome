@@ -2,6 +2,8 @@
 
 Get Metronome Pro running in 3 simple steps!
 
+**Requirements**: Node.js 18+ and Expo Go SDK 54 compatible device
+
 ## Step 1: Install Dependencies
 
 ```bash
