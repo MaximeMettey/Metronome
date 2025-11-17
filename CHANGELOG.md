@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2025-11-17
+
+### Added
+- Added expo-dev-client ~5.0.0 for custom development builds
+- Added EAS development build configuration in eas.json
+- Added npm scripts: `start:dev`, `build:dev:android`, `build:dev:ios`
+- Added DEVELOPMENT-BUILD.md guide for creating custom builds
+
+### Fixed
+- Solution for PlatformConstants and Worklets errors: use development build instead of Expo Go
+- Development build bypasses Expo Go version constraints
+
+### Note
+- **Recommended approach**: Use development build for full native module control
+- Expo Go has version constraints that cause Worklets and PlatformConstants errors
+- Development build = custom "Expo Go" with exact native versions for this project
+- See DEVELOPMENT-BUILD.md for complete setup instructions
+
 ## [1.2.1] - 2025-11-17
 
 ### Fixed
