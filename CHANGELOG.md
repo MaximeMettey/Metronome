@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-11-17
+
+### Changed - BREAKING
+- Updated ALL packages to official Expo SDK 54 expected versions
+- react: 18.3.1 → 19.1.0
+- react-native: 0.76.5 → 0.81.5
+- expo-av: ~15.0.0 → ~16.0.7
+- expo-haptics: ~14.0.0 → ~15.0.7
+- expo-linear-gradient: ~14.0.0 → ~15.0.7
+- expo-localization: ~16.0.0 → ~17.0.7
+- expo-status-bar: ~2.0.0 → ~3.0.8
+- react-native-reanimated: ~3.16.0 → ~4.1.1
+- @react-native-async-storage/async-storage: ~2.0.0 → 2.2.0
+- @types/react: ~18.3.0 → ~19.1.10
+- babel-preset-expo: ~12.0.0 → ~54.0.0
+- jest: ^30.2.0 → ~29.7.0
+- Removed @types/react-native (no longer needed, provided by react-native)
+
+### Note
+- These are the OFFICIAL versions expected by Expo SDK 54
+- React 19 is now required (breaking change from React 18)
+- React Native 0.81.5 is the correct version for SDK 54
+- All Expo packages updated to their SDK 54 versions
+
 ## [1.1.6] - 2025-11-17
 
 ### Fixed
