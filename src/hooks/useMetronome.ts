@@ -21,6 +21,8 @@ export const useMetronome = () => {
   const engineRef = useRef<MetronomeEngine | null>(null);
   const audioServiceRef = useRef<AudioService | null>(null);
   const soundTypeRef = useRef<SoundType>('click');
+  const soundEnabledRef = useRef<boolean>(true);
+  const vibrationEnabledRef = useRef<boolean>(false);
 
   useEffect(() => {
     // Initialize services
@@ -41,20 +43,20 @@ export const useMetronome = () => {
   const handleBeat = useCallback((beat: number, isStrong: boolean) => {
     setState(prev => ({ ...prev, currentBeat: beat }));
 
-    // Play sound
-    if (state.soundEnabled && audioServiceRef.current) {
+    // Play sound - use ref to get current value
+    if (soundEnabledRef.current && audioServiceRef.current) {
       audioServiceRef.current.playBeat(soundTypeRef.current, isStrong);
     }
 
-    // Vibration
-    if (state.vibrationEnabled) {
+    // Vibration - use ref to get current value
+    if (vibrationEnabledRef.current) {
       if (isStrong) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
       } else {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       }
     }
-  }, [state.soundEnabled, state.vibrationEnabled]);
+  }, []); // Empty deps - uses refs which don't need to be in deps
 
   const start = useCallback(() => {
     if (engineRef.current) {
@@ -106,7 +108,11 @@ export const useMetronome = () => {
   }, []);
 
   const toggleSound = useCallback(() => {
-    setState(prev => ({ ...prev, soundEnabled: !prev.soundEnabled }));
+    setState(prev => {
+      const newValue = !prev.soundEnabled;
+      soundEnabledRef.current = newValue; // Update ref
+      return { ...prev, soundEnabled: newValue };
+    });
   }, []);
 
   const toggleVisual = useCallback(() => {
@@ -114,7 +120,11 @@ export const useMetronome = () => {
   }, []);
 
   const toggleVibration = useCallback(() => {
-    setState(prev => ({ ...prev, vibrationEnabled: !prev.vibrationEnabled }));
+    setState(prev => {
+      const newValue = !prev.vibrationEnabled;
+      vibrationEnabledRef.current = newValue; // Update ref
+      return { ...prev, vibrationEnabled: newValue };
+    });
   }, []);
 
   const setSoundType = useCallback((soundType: SoundType) => {

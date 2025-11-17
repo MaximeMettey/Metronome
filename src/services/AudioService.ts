@@ -1,109 +1,46 @@
-import { Audio } from 'expo-av';
 import { SoundType } from '@/types';
-import { Platform } from 'react-native';
-
-const POOL_SIZE = 8; // 8 instances per sound type
 
 export class AudioService {
-  private soundPools: Map<string, Audio.Sound[]> = new Map();
-  private poolIndexes: Map<string, number> = new Map();
   private volume: number = 0.8;
   private audioContext: AudioContext | null = null;
 
   async initialize(): Promise<void> {
     try {
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: true,
-        shouldDuckAndroid: true,
-        playThroughEarpieceAndroid: false,
-      });
+      // Try to initialize Web Audio API on all platforms
+      const AudioContextClass =
+        (typeof window !== 'undefined' && (window.AudioContext || (window as any).webkitAudioContext)) ||
+        (global as any).AudioContext;
 
-      if (Platform.OS === 'web' && typeof window !== 'undefined') {
-        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-        if (AudioContextClass) {
-          this.audioContext = new AudioContextClass();
-        }
+      if (AudioContextClass) {
+        this.audioContext = new AudioContextClass();
+        console.log('✅ Web Audio API initialized');
       } else {
-        // Load sound files for mobile
-        await this.loadSounds();
+        console.warn('❌ Web Audio API not available on this platform');
       }
     } catch (error) {
       console.error('Failed to initialize audio:', error);
     }
   }
 
-  private async loadSounds(): Promise<void> {
-    try {
-      const soundTypes = [
-        { key: 'click-high', source: require('../../assets/sounds/click-high.wav') },
-        { key: 'click-low', source: require('../../assets/sounds/click-low.wav') },
-        { key: 'woodblock-high', source: require('../../assets/sounds/woodblock-high.wav') },
-        { key: 'woodblock-low', source: require('../../assets/sounds/woodblock-low.wav') },
-        { key: 'beep-high', source: require('../../assets/sounds/beep-high.wav') },
-        { key: 'beep-low', source: require('../../assets/sounds/beep-low.wav') },
-      ];
-
-      // Create pool of sounds - multiple instances per type
-      for (const { key, source } of soundTypes) {
-        const pool: Audio.Sound[] = [];
-
-        for (let i = 0; i < POOL_SIZE; i++) {
-          const { sound } = await Audio.Sound.createAsync(
-            source,
-            { volume: this.volume, shouldPlay: false, isLooping: false },
-            null,
-            true // downloadFirst
-          );
-          pool.push(sound);
-        }
-
-        this.soundPools.set(key, pool);
-        this.poolIndexes.set(key, 0);
-      }
-
-      console.log(`All sounds loaded (${POOL_SIZE} instances per type)`);
-    } catch (error) {
-      console.error('Failed to load sounds:', error);
-    }
-  }
-
   playBeat(type: SoundType, isStrong: boolean): void {
-    try {
-      if (this.audioContext && Platform.OS === 'web') {
-        // Web: Use Web Audio API
-        this.playBeep(isStrong ? 1000 : 800, 0.05, isStrong ? 1.0 : 0.6);
-      } else {
-        // Mobile: Use pre-loaded sounds
-        this.playMobileBeep(type, isStrong);
-      }
-    } catch (error) {
-      console.error('Failed to play beat:', error);
+    if (!this.audioContext) {
+      console.warn('AudioContext not initialized, cannot play beat');
+      return;
     }
-  }
 
-  private playMobileBeep(type: SoundType, isStrong: boolean): void {
-    try {
-      const soundKey = `${type}-${isStrong ? 'high' : 'low'}`;
-      const pool = this.soundPools.get(soundKey);
+    // Map sound types to frequencies
+    const frequencies: Record<SoundType, { high: number; low: number }> = {
+      click: { high: 1000, low: 800 },
+      woodblock: { high: 1200, low: 900 },
+      beep: { high: 880, low: 660 },
+    };
 
-      if (!pool || pool.length === 0) return;
+    const freq = frequencies[type];
+    const frequency = isStrong ? freq.high : freq.low;
+    const duration = type === 'beep' ? 0.1 : type === 'woodblock' ? 0.08 : 0.05;
+    const volumeMultiplier = isStrong ? 1.0 : 0.6;
 
-      // Get next available sound from pool (round-robin)
-      const index = this.poolIndexes.get(soundKey) || 0;
-      const sound = pool[index];
-
-      // Update index for next call
-      this.poolIndexes.set(soundKey, (index + 1) % POOL_SIZE);
-
-      // Stop then play - fire and forget both calls
-      // This ensures the sound plays from the start even if it was playing
-      sound.stopAsync().catch(() => {});
-      sound.playAsync().catch(() => {});
-    } catch (error) {
-      // Silent catch to avoid console spam
-    }
+    this.playBeep(frequency, duration, volumeMultiplier);
   }
 
   private playBeep(frequency: number, duration: number, volumeMultiplier: number = 1.0): void {
@@ -128,31 +65,16 @@ export class AudioService {
 
   setVolume(volume: number): void {
     this.volume = Math.max(0, Math.min(1, volume));
-
-    // Update volume for all sounds in all pools
-    for (const pool of this.soundPools.values()) {
-      for (const sound of pool) {
-        sound.setVolumeAsync(this.volume).catch(() => {});
-      }
-    }
   }
 
   async cleanup(): Promise<void> {
-    for (const pool of this.soundPools.values()) {
-      for (const sound of pool) {
-        try {
-          await sound.unloadAsync();
-        } catch (error) {
-          console.error('Failed to unload sound:', error);
-        }
-      }
-    }
-    this.soundPools.clear();
-    this.poolIndexes.clear();
-
     if (this.audioContext) {
-      await this.audioContext.close();
-      this.audioContext = null;
+      try {
+        await this.audioContext.close();
+        this.audioContext = null;
+      } catch (error) {
+        console.error('Failed to close audio context:', error);
+      }
     }
   }
 }
