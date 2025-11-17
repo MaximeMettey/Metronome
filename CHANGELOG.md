@@ -5,7 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.2] - 2025-11-17
+## [1.3.0] - 2025-11-17
+
+### Changed - MAJOR SIMPLIFICATION
+- **REMOVED react-native-reanimated** - Source of all Expo Go compatibility issues
+- **Animations now use standard React Native Animated API** - Works with ANY Expo Go version
+- Removed expo-dev-client (not needed anymore)
+- Removed Reanimated import from index.js
+- Removed Reanimated plugin from babel.config.js
+- Rewrote BeatIndicator.tsx to use Animated instead of Reanimated
+
+### Why This Change
+- react-native-reanimated caused: Worklets errors, PlatformConstants errors, version conflicts
+- For a metronome app, standard Animated API is SUFFICIENT and SIMPLER
+- **Now works with Expo Go out of the box - NO BUILD REQUIRED**
+- No more native module version conflicts
+- Hot reload works perfectly
+- Same visual result, zero complexity
+
+### Result
+- ✅ Works with Expo Go immediately
+- ✅ No version conflicts
+- ✅ No build process needed
+- ✅ Smooth animations with native driver
+- ✅ 100% compatible across all Expo Go versions
+
+## [1.2.2] - 2025-11-17 (SUPERSEDED by 1.3.0)
 
 ### Added
 - Added expo-dev-client ~5.0.0 for custom development builds

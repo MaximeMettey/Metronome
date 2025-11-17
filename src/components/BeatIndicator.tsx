@@ -1,11 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withSequence,
-} from 'react-native-reanimated';
+import React, { useEffect, useRef } from 'react';
+import { View, StyleSheet, Animated } from 'react-native';
 import { COLORS } from '@/constants/defaults';
 
 interface BeatIndicatorProps {
@@ -44,26 +38,40 @@ interface BeatDotProps {
 }
 
 const BeatDot: React.FC<BeatDotProps> = ({ isActive, isStrong, visualEnabled }) => {
-  const scale = useSharedValue(1);
-  const opacity = useSharedValue(0.3);
+  const scale = useRef(new Animated.Value(1)).current;
+  const opacity = useRef(new Animated.Value(0.3)).current;
 
   useEffect(() => {
     if (isActive && visualEnabled) {
-      scale.value = withSequence(
-        withTiming(1.5, { duration: 100 }),
-        withTiming(1, { duration: 100 })
-      );
-      opacity.value = withSequence(
-        withTiming(1, { duration: 100 }),
-        withTiming(0.3, { duration: 200 })
-      );
-    }
-  }, [isActive, visualEnabled]);
+      // Animate scale
+      Animated.sequence([
+        Animated.timing(scale, {
+          toValue: 1.5,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scale, {
+          toValue: 1,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+      ]).start();
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-    opacity: opacity.value,
-  }));
+      // Animate opacity
+      Animated.sequence([
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 0.3,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [isActive, visualEnabled, scale, opacity]);
 
   const dotColor = isActive
     ? isStrong
@@ -77,7 +85,10 @@ const BeatDot: React.FC<BeatDotProps> = ({ isActive, isStrong, visualEnabled }) 
         styles.beat,
         { backgroundColor: dotColor },
         isStrong && styles.strongBeat,
-        animatedStyle,
+        {
+          transform: [{ scale }],
+          opacity,
+        },
       ]}
     />
   );
