@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.6] - 2025-11-17
+
+### Fixed
+- Fixed React Native version to 0.76.5 (correct version for Expo SDK 54)
+- Reverted react-native from ^0.80.2 to 0.76.5 (exact version)
+- Reverted @types/react from ~19.0.0 to ~18.3.0 (matches React 18.3.1)
+- Resolved peer dependency conflicts
+
+### Changed
+- react-native: ^0.80.2 → 0.76.5 (locked to Expo SDK 54 compatible version)
+- @types/react: ~19.0.0 → ~18.3.0 (matches React 18.3.1)
+
+### Note
+- React Native 0.76.5 is the correct version for Expo SDK 54
+- React 18.3.1 is the correct version (not React 19)
+- Using exact version for react-native to prevent auto-updates
+
 ## [1.1.5] - 2025-11-17
 
 ### Fixed
