@@ -2,11 +2,8 @@ import { Audio } from 'expo-av';
 import { SoundType } from '@/types';
 import { Platform } from 'react-native';
 
-const SOUND_POOL_SIZE = 4; // Number of instances per sound for pooling
-
 export class AudioService {
-  private soundPools: Map<string, Audio.Sound[]> = new Map();
-  private poolIndexes: Map<string, number> = new Map();
+  private sounds: Map<string, Audio.Sound> = new Map();
   private volume: number = 0.8;
   private audioContext: AudioContext | null = null;
 
@@ -26,7 +23,7 @@ export class AudioService {
           this.audioContext = new AudioContextClass();
         }
       } else {
-        // Load sound files with pooling for mobile
+        // Load sound files for mobile
         await this.loadSounds();
       }
     } catch (error) {
@@ -45,22 +42,22 @@ export class AudioService {
         { key: 'beep-low', source: require('../../assets/sounds/beep-low.wav') },
       ];
 
-      // Create sound pool for each sound type
+      // Load one sound per type
       for (const { key, source } of soundTypes) {
-        const pool: Audio.Sound[] = [];
-
-        for (let i = 0; i < SOUND_POOL_SIZE; i++) {
-          const { sound } = await Audio.Sound.createAsync(source, {
+        const { sound } = await Audio.Sound.createAsync(
+          source,
+          {
             volume: this.volume,
-          });
-          pool.push(sound);
-        }
-
-        this.soundPools.set(key, pool);
-        this.poolIndexes.set(key, 0);
+            shouldPlay: false,
+            isLooping: false,
+          },
+          null,
+          true // downloadFirst for better performance
+        );
+        this.sounds.set(key, sound);
       }
 
-      console.log('All sounds loaded with pooling');
+      console.log('All sounds loaded successfully');
     } catch (error) {
       console.error('Failed to load sounds:', error);
     }
@@ -72,7 +69,7 @@ export class AudioService {
         // Web: Use Web Audio API
         this.playBeep(isStrong ? 1000 : 800, 0.05, isStrong ? 1.0 : 0.6);
       } else {
-        // Mobile: Use pre-loaded sound pool
+        // Mobile: Use pre-loaded sounds
         this.playMobileBeep(type, isStrong);
       }
     } catch (error) {
@@ -83,21 +80,14 @@ export class AudioService {
   private playMobileBeep(type: SoundType, isStrong: boolean): void {
     try {
       const soundKey = `${type}-${isStrong ? 'high' : 'low'}`;
-      const pool = this.soundPools.get(soundKey);
+      const sound = this.sounds.get(soundKey);
 
-      if (!pool || pool.length === 0) return;
+      if (!sound) return;
 
-      // Get next sound from pool (round-robin)
-      let currentIndex = this.poolIndexes.get(soundKey) || 0;
-      const sound = pool[currentIndex];
-
-      // Update index for next time
-      currentIndex = (currentIndex + 1) % SOUND_POOL_SIZE;
-      this.poolIndexes.set(soundKey, currentIndex);
-
-      // Play without await - fire and forget for minimal latency
-      sound.setVolumeAsync(this.volume).catch(() => {});
-      sound.replayAsync().catch(() => {});
+      // Reset to start and play immediately - fire and forget
+      // Don't call setVolumeAsync here to avoid crackles
+      sound.setPositionAsync(0).catch(() => {});
+      sound.playAsync().catch(() => {});
     } catch (error) {
       // Silent catch to avoid console spam
     }
@@ -126,26 +116,21 @@ export class AudioService {
   setVolume(volume: number): void {
     this.volume = Math.max(0, Math.min(1, volume));
 
-    // Update volume for all sounds in pools
-    for (const pool of this.soundPools.values()) {
-      for (const sound of pool) {
-        sound.setVolumeAsync(this.volume).catch(() => {});
-      }
+    // Update volume for all loaded sounds
+    for (const sound of this.sounds.values()) {
+      sound.setVolumeAsync(this.volume).catch(() => {});
     }
   }
 
   async cleanup(): Promise<void> {
-    for (const pool of this.soundPools.values()) {
-      for (const sound of pool) {
-        try {
-          await sound.unloadAsync();
-        } catch (error) {
-          console.error('Failed to unload sound:', error);
-        }
+    for (const sound of this.sounds.values()) {
+      try {
+        await sound.unloadAsync();
+      } catch (error) {
+        console.error('Failed to unload sound:', error);
       }
     }
-    this.soundPools.clear();
-    this.poolIndexes.clear();
+    this.sounds.clear();
 
     if (this.audioContext) {
       await this.audioContext.close();
