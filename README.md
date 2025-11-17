@@ -66,6 +66,11 @@ npm install
 yarn install
 ```
 
+**IMPORTANT**: If you encounter any issues with missing dependencies, run:
+```bash
+npm install --legacy-peer-deps
+```
+
 3. **Start the development server**
 ```bash
 npm start
@@ -109,6 +114,40 @@ The web version will open in your default browser at `http://localhost:19006`
 3. Scan the QR code with:
    - **iOS**: Camera app
    - **Android**: Expo Go app
+
+## 🛠️ Troubleshooting
+
+### Common Issues
+
+#### "Cannot find module 'babel-plugin-module-resolver'"
+This should be fixed in the latest version. If you still see this error:
+```bash
+npm install --save-dev babel-plugin-module-resolver
+```
+
+#### "Unable to resolve asset"
+The app is configured to work without custom assets. Default Expo assets will be used.
+
+#### Metro bundler cache issues
+If you experience any caching issues:
+```bash
+expo start -c
+# or
+npx expo start --clear
+```
+
+#### Module resolution errors
+Clear node_modules and reinstall:
+```bash
+rm -rf node_modules
+npm install
+```
+
+#### TypeScript errors
+Make sure TypeScript is properly installed:
+```bash
+npm install --save-dev typescript @types/react @types/react-native
+```
 
 ## 🏗️ Project Structure
 
