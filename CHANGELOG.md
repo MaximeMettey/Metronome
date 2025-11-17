@@ -5,7 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0] - 2025-11-17
+## [1.2.1] - 2025-11-17
+
+### Fixed
+- Fixed Reanimated Worklets version mismatch error (0.6.1 vs 0.5.1)
+- Downgraded packages to Expo Go compatible versions
+- react-native-reanimated: ~4.1.1 → ~3.16.0 (Expo Go compatible)
+- react: 19.1.0 → 18.3.1 (stable version)
+- react-native: 0.81.5 → 0.76.5 (stable version)
+- All Expo packages reverted to widely supported SDK 54 versions:
+  - expo-av: ~16.0.7 → ~15.0.0
+  - expo-haptics: ~15.0.7 → ~14.0.0
+  - expo-linear-gradient: ~15.0.7 → ~14.0.0
+  - expo-localization: ~17.0.7 → ~16.0.0
+  - expo-status-bar: ~3.0.8 → ~2.0.0
+  - @react-native-async-storage/async-storage: 2.2.0 → ~2.0.0
+- Re-added @types/react-native: ~0.73.0
+- Reverted @types/react: ~19.1.10 → ~18.3.0
+- Reverted babel-preset-expo: ~54.0.0 → ~12.0.0
+- Reverted jest: ~29.7.0 → ^29.7.0
+
+### Note
+- These versions are more widely compatible with standard Expo Go installations
+- React 18.3.1 and React Native 0.76.5 are the stable SDK 54 versions
+- Reanimated 3.16.0 works with most Expo Go app versions
+- App now works with Expo Go without requiring latest update
+
+## [1.2.0] - 2025-11-17 (REVERTED in 1.2.1)
 
 ### Changed - BREAKING
 - Updated ALL packages to official Expo SDK 54 expected versions
@@ -24,10 +50,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed @types/react-native (no longer needed, provided by react-native)
 
 ### Note
-- These are the OFFICIAL versions expected by Expo SDK 54
-- React 19 is now required (breaking change from React 18)
-- React Native 0.81.5 is the correct version for SDK 54
-- All Expo packages updated to their SDK 54 versions
+- These were the OFFICIAL bleeding-edge versions for Expo SDK 54
+- However, they were not compatible with most Expo Go installations
+- Reverted in v1.2.1 for better compatibility
 
 ## [1.1.6] - 2025-11-17
 
