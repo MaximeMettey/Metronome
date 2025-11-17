@@ -18,6 +18,7 @@ This guide helps you migrate from Expo SDK 51 to SDK 54.
 | expo-linear-gradient | ~13.0.0 | ~14.0.0 |
 | react-native-reanimated | ~3.10.0 | ~3.16.0 |
 | @react-native-async-storage/async-storage | 1.23.0 | ~2.0.0 |
+| @types/react-native | ^0.73.0 | ~0.73.0 (compatible) |
 
 ## Migration Steps
 

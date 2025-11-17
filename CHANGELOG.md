@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-11-17
+
+### Fixed
+- Fixed @types/react-native version to ~0.73.0 (0.76.0 types not yet available)
+- Corrected package.json to use compatible type definitions
+
 ## [1.1.0] - 2025-11-17
 
 ### Changed
@@ -24,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated all devDependencies to latest versions
 - Changed web build command from `expo build:web` to `expo export:web`
 - Web build output now goes to `dist/` directory instead of `web-build/`
+- Note: Using @types/react-native ~0.73.0 as 0.76.0 types are not yet published
 
 ### Fixed
 - Added missing babel-plugin-module-resolver dependency
