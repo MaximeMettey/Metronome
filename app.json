@@ -2,7 +2,7 @@
   "expo": {
     "name": "Metronome Pro",
     "slug": "metronome-pro",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -27,7 +27,6 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-av",
       "expo-localization"
     ]
   }
