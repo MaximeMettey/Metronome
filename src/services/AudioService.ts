@@ -97,9 +97,10 @@ export class AudioService {
       // Update index for next call
       this.poolIndexes.set(soundKey, (index + 1) % POOL_SIZE);
 
-      // Play from position 0 - single call, fire and forget
-      // Let the sound play to completion (50-100ms), don't stop it
-      sound.playFromPositionAsync(0).catch(() => {});
+      // Stop then play - fire and forget both calls
+      // This ensures the sound plays from the start even if it was playing
+      sound.stopAsync().catch(() => {});
+      sound.playAsync().catch(() => {});
     } catch (error) {
       // Silent catch to avoid console spam
     }
